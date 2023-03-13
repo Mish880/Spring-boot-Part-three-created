@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Food Paradise</title>
+    <link rel="icon" href="assets/images/Logo.png">
+    <link rel="stylesheet" href="item.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/BootStrap/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="navigation">
+    <nav>
+        <img src="assets/images/Logo.png" class="logo" alt="Error Loading Image">
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="item.html">Food Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Order</a></li>
+        </ul>
+        <div>
+            <a href="#" class="logo-btn">Log in</a>
+            <a href="#" class="Dbtn">Download App</a>
+        </div>
+    </nav>
+
+
+    <section class="container-fluid mt-3">
+        <section class="row mt-3 justify-content-around">
+            <div class="col-12 col-md-4">
+                <h1 class="text-secondary"> Add Food Details</h1>
+                <div class="mb-3">
+                    <form class="d-flex">
+                        <button class="btn btn-dark"  type="button"  id="btnFoodMealItemSearch">Search Food Meals</button>
+                        <input class="form-control" id="txtSearchFoodMealId" placeholder="Meal ID" type="text">
+
+                    </form>
+                </div>
+                <div class="mb-3">
+                    <div class="card" style="width: 20rem;">
+                        <img src="assets/images/Ione.jpg" class="card-img-top" alt="Error loading image">
+                        <div class="card-body">
+                            <h5 class="card-dark">Add Food Meals</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-10 col-md-5">
+                <form id="FoodMealForm">
+                    <button class="btn btn-primary" type="button" id="btnSaveMeal">Add New Meal</button>
+                    <button class="btn btn-success" type="button" id="btnLoadMeal">Load All Meals</button>
+                    <button class="btn btn-warning" type="button" id="btnUpdateMeal">Update Meals</button>
+                    <div>
+
+
+
+                        <div class="mb-3">
+                            <label class="form-label" for="txtFoodMID">Food Meal ID : -</label>
+                            <input class="form-control" id="txtFoodMID" name="itemid" placeholder="Food Meal Id" type="text">
+                            <p><small class="text-danger pl-1" id="lblFoodId"></small></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="txtFoodMName">Food Meal Type : -</label>
+                            <input class="form-control" id="txtFoodMName" name="itemname" placeholder="Food Meal Name" type="text">
+                            <p><small class="text-danger pl-1" id="lblFoodName"></small></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="txtFoodMQty">Food Meal Qty : -</label>
+                            <input class="form-control" id="txtFoodMQty" name="itemqty" placeholder=" Food Qty" type="text">
+                            <p><small class="text-danger pl-1" id="lblFoodQty"></small></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="txtFoodMSalary">Food Meal Price : - </label>
+                            <input class="form-control" id="txtFoodMSalary" name="itemsalary" placeholder="Food Price" type="text">
+                            <p><small class="text-danger pl-1" id="lblFoodSalary"></small></p>
+                        </div>
+
+
+
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" id="btnDeleteFoodMeals" type="Button">Delete</button>
+                            <button class="btn btn-secondary" id="btnClearDeleteDeleteFoodMealsForms" type="reset">Clear</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </section>
+
+        <section class="row mt-4">
+            <div class="col">
+                <table class="table table-bordered table-hover mt-3">
+                    <thead class="bg-danger text-white">
+                    <tr class="table-dark">
+                        <th scope="col">Food Meal Id</th>
+                        <th scope="col">Food Meal Name</th>
+                        <th scope="col">Food Meal Qty</th>
+                        <th scope="col">Food Meal Price</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="FoodMealTable">
+
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+</div>
+
+<script src="assets/BootStrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/JQuery/jquery-3.6.0.min.js"></script>
+</body>
+</html>
