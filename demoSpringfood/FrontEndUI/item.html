@@ -121,5 +121,164 @@
 
 <script src="assets/BootStrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/JQuery/jquery-3.6.0.min.js"></script>
+
+<script>
+    const baseFoodMeal = "http://localhost:8080/item"
+    //----------------------------------------------------------------------------------------------------------
+
+    $("#btnSaveMeal").click(function () {
+        saveFoodMealitem();
+
+    });
+
+    function saveFoodMealitem() {
+        var data = $("#FoodMealForm").serialize();
+        $.ajax({
+            url: baseFoodMeal,
+            method: "POST",
+            data: data,
+            success: function (res) {
+                if (res.code == 200) {
+                    alert("Save Your Food Meal");
+                } else {
+                    alert("Already Save");
+                }
+            },
+            error: function (ob) {
+                alert(ob.responseJSON.message);
+
+            }
+        });
+    }
+    //-----------------------------------------------------------------------------------------------------------------
+    $("#btnLoadMeal").click(function () {
+        loadAllFoodMeals();
+    });
+
+    function loadAllFoodMeals(){
+        $("#FoodMealTable").empty();
+        $.ajax({
+            url: baseFoodMeal,
+            method: "GET",
+            success: function (resp) {
+                for (const FMItem of resp.data) {
+                    let row = `<tr><td>${FMItem.itemid}</td> <td>${FMItem.itemname}</td> <td>${FMItem.itemqty}</td> <td>${FMItem.itemsalary}</td></tr>`;
+                    $("#FoodMealTable").append(row);
+                }
+                bindClickEvent();
+            },
+            error: function(ob) {
+                alert(ob.responseJSON.message);
+            }
+        });
+    }
+    function  bindClickEvent() {
+        $("#FoodMealTable>tr").click(function () {
+            let itemid = $(this).children().eq(0).text();
+            let itemname = $(this).children().eq(1).text();
+            let itemqty = $(this).children().eq(2).text();
+            let itemsalary = $(this).children().eq(3).text();
+
+            /*This is set Values to text-fields*/
+            $("#txtFoodMID").val(itemid);
+            $("#txtFoodMName").val(itemname);
+            $("#txtFoodMQty").val(itemqty);
+            $("#txtFoodMSalary").val(itemsalary);
+
+        });
+    }
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    $("#btnDeleteFoodMeals").click(function (){
+        deleteFoodItems();
+    });
+
+    function deleteFoodItems(){
+        let FoodMealItemId = $("#txtFoodMID").val();
+        $.ajax({
+            url: baseFoodMeal +"?itemid=" + FoodMealItemId,
+            method:"DELETE",
+            success: function (res){
+                if (res.code==200) {
+                    alert("FoodMeals Successfully Deleted");
+                    loadAllFoodMeals();
+                    clearFoodForm();
+                }
+            },
+            error:function (ob) {
+                alert(ob.responseJSON.message);
+            }
+
+        });
+    }
+    //--------------------------------------------------------------------------------------------------------------
+    $("#btnUpdateMeal").click(function (){
+        FoodMealUpdateItem();
+    });
+
+    function FoodMealUpdateItem() {
+        var FoodMealob = {
+            itemid : $("#txtFoodMID").val(),
+            itemname : $("#txtFoodMName").val(),
+            itemqty : $("#txtFoodMQty").val(),
+            itemsalary : $("#txtFoodMSalary").val(),
+
+        }
+        $.ajax({
+            url: baseFoodMeal,
+            method:"PUT",
+            contentType:"application/json",
+            data:JSON.stringify(FoodMealob),
+            success:function (res) {
+                if (res.code == 200) {
+                    alert("Successfully Updated");
+                    loadAllFoodMeals();
+                    clearFoodForm();
+
+                }
+
+            },
+            error:function (ob) {
+                alert(ob.responseJSON.message);
+            }
+        });
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------
+    $("#btnFoodMealItemSearch").click(function () {
+        searchFoodMealItem();
+    });
+
+    function searchFoodMealItem () {
+        var FoodMIDE = $("#txtSearchFoodMealId").val();
+        $.ajax({
+            url:baseFoodMeal + "/" +FoodMIDE,
+            method:"GET",
+            success: function (res) {
+                if (res.code==200){
+                    var FMealItemss = res.data;
+                    $("#txtFoodMID").val(FMealItemss.itemid);
+                    $("#txtFoodMName").val(FMealItemss.itemname);
+                    $("#txtFoodMQty").val(FMealItemss.itemqty);
+                    $("#txtFoodMSalary").val(FMealItemss.itemsalary);
+                } else {
+                    clearFoodForm();
+                    loadAllFoodMeals();
+                }
+
+            },
+            error:function (ob) {
+                alert(ob.responseJSON.message);
+
+            }
+        });
+    }
+    //-----------------------------------------------------------------------------------------------------------------------
+    function clearFoodForm() {
+        $("#txtFoodMID").val("");
+        $("#txtFoodMName").val("");
+        $("#txtFoodMQty").val("");
+        $("#txtFoodMSalary").val("");
+    }
+</script>
 </body>
 </html>
